@@ -1,0 +1,292 @@
+:root {
+  --bg: #f4f6fb;
+  --bg-accent: #e3e9ff;
+  --card: #ffffff;
+  --text: #1d2233;
+  --muted: #6b7288;
+  --border: #e2e6f0;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-soft: #eef0ff;
+  --error-bg: #fdecef;
+  --error: #b00020;
+  --shadow: 0 10px 30px rgba(31, 41, 90, .10);
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1220;
+    --bg-accent: #1a1f3a;
+    --card: #181c30;
+    --text: #e8eaf6;
+    --muted: #98a0be;
+    --border: #2a3050;
+    --primary: #818cf8;
+    --primary-hover: #a5b4fc;
+    --primary-soft: #23284a;
+    --error-bg: #3a1a22;
+    --error: #ff8a9b;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 400px at 10% -10%, var(--bg-accent), transparent 60%),
+    radial-gradient(700px 400px at 100% 0%, var(--primary-soft), transparent 55%),
+    var(--bg);
+  line-height: 1.5;
+}
+
+/* Contenedor central */
+h1, form, table, .error {
+  width: 100%;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+h1::before {
+  content: "f(x)";
+  display: inline-block;
+  margin-right: .6rem;
+  padding: .15rem .55rem;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #a855f7);
+  border-radius: 8px;
+  vertical-align: middle;
+}
+
+/* Formulario como tarjeta */
+form {
+  display: grid;
+  gap: .9rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: .8rem 1rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+input[type=text] {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 1.05rem;
+}
+
+input[type=text]::placeholder { color: var(--muted); opacity: .7; }
+
+input[type=text]:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+button {
+  padding: .85rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 35%, transparent);
+  transition: transform .12s, box-shadow .12s, filter .12s;
+}
+
+button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+button:active { transform: translateY(0); box-shadow: none; }
+button:focus-visible { outline: 3px solid var(--primary-soft); outline-offset: 2px; }
+
+/* Resultados */
+table {
+  margin-top: 1.5rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: aparecer .35s ease both;
+}
+
+th, td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+th {
+  width: 130px;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+code {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+tr:hover td { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+
+/* Error */
+.error {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  color: var(--error);
+  font-weight: 500;
+  background: var(--error-bg);
+  border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
+  border-left: 5px solid var(--error);
+  border-radius: 10px;
+  animation: aparecer .3s ease both;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Móvil */
+@media (max-width: 520px) {
+  body { padding: 1.5rem .75rem; }
+  h1 { font-size: 1.5rem; }
+  form { padding: 1.1rem; }
+  th, td { display: block; width: 100%; padding: .6rem 1rem; }
+  th { border-bottom: 0; padding-bottom: .3rem; }
+  td { padding-top: .3rem; }
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  max-width: 680px;
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+footer strong {
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+/* Tabla de ejemplos */
+h2 {
+  width: 100%;
+  max-width: 680px;
+  margin: 2.5rem auto .4rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.nota {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* La tabla de ejemplos es más ancha que el resto */
+table.ejemplos {
+  max-width: 960px;
+  margin-top: 1rem;
+}
+
+.ejemplos th {
+  width: auto;
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.ejemplos td { padding: .75rem 1rem; }
+
+.ejemplos td:first-child {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.ejemplos code {
+  font-size: .95rem;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: all;   /* un clic selecciona toda la expresión */
+}
+
+.ejemplos td:nth-child(2) code {
+  padding: .15rem .45rem;
+  background: var(--primary-soft);
+  border-radius: 6px;
+}
+
+@media (max-width: 1000px) {
+  table.ejemplos { display: block; overflow-x: auto; }
+}
+
+@media (max-width: 520px) {
+  .ejemplos th, .ejemplos td { display: table-cell; width: auto; padding: .6rem .75rem; }
+}

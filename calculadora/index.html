@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Científica</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="rig">
+
+  <div class="rig-label">
+    <div class="name"><b>Unidad</b> de Cálculo</div>
+    <div class="rig-label-right">
+      <div class="id">MOD.03 / CIENTÍFICA</div>
+      <button class="theme-toggle" id="themeToggle" type="button" title="Cambiar tema" aria-label="Cambiar tema">
+        <span class="theme-icon theme-icon-dark">☾</span>
+        <span class="theme-icon theme-icon-light">☀</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="unit">
+
+    <!-- Selector de módulos -->
+    <div class="module-switch" role="tablist">
+      <button class="mswitch-btn active" data-module="calc" role="tab" aria-selected="true">
+        <span class="mswitch-idx">01</span> Calculadora
+      </button>
+      <button class="mswitch-btn" data-module="ref" role="tab" aria-selected="false">
+        <span class="mswitch-idx">02</span> Referencia
+      </button>
+      <button class="mswitch-btn" data-module="base" role="tab" aria-selected="false">
+        <span class="mswitch-idx">03</span> Bases
+      </button>
+    </div>
+
+    <!-- ============ MÓDULO 01: CALCULADORA ============ -->
+    <div class="module active" id="module-calc">
+
+      <div class="display">
+        <div class="display-top">
+          <div class="mode-tag">
+            <span id="mode-deg" class="active">DEG</span>
+            <span id="mode-rad">RAD</span>
+          </div>
+          <div class="status-dot" title="listo"></div>
+        </div>
+        <div class="history-tape" id="historyTape">&nbsp;</div>
+        <div class="main-readout" id="readout">0<span class="cursor"></span></div>
+        <div class="display-bottom">
+          <button class="copy-btn" id="copyResult" type="button">
+            <span class="copy-icon">⧉</span> Copiar
+          </button>
+        </div>
+      </div>
+
+      <div class="keypad">
+        <div class="key fn" data-act="clear-entry">AC</div>
+        <div class="key fn" data-act="backspace">⌫</div>
+        <div class="key fn" data-act="paren-open">(</div>
+        <div class="key fn" data-act="paren-close">)</div>
+        <div class="key op" data-act="op" data-val="%">%</div>
+
+        <div class="key fn" data-act="fn" data-val="sin(">sin</div>
+        <div class="key fn" data-act="fn" data-val="cos(">cos</div>
+        <div class="key fn" data-act="fn" data-val="tan(">tan</div>
+        <div class="key fn" data-act="fn" data-val="log(">log</div>
+        <div class="key fn" data-act="fn" data-val="ln(">ln</div>
+
+        <div class="key fn" data-act="fn" data-val="sqrt(">√</div>
+        <div class="key fn" data-act="op" data-val="^">xʸ</div>
+        <div class="key fn" data-act="const" data-val="pi">π</div>
+        <div class="key fn" data-act="const" data-val="e">e</div>
+        <div class="key op" data-act="op" data-val="/">÷</div>
+
+        <div class="key num" data-act="num" data-val="7">7</div>
+        <div class="key num" data-act="num" data-val="8">8</div>
+        <div class="key num" data-act="num" data-val="9">9</div>
+        <div class="key fn" data-act="fn" data-val="!">n!</div>
+        <div class="key op" data-act="op" data-val="*">×</div>
+
+        <div class="key num" data-act="num" data-val="4">4</div>
+        <div class="key num" data-act="num" data-val="5">5</div>
+        <div class="key num" data-act="num" data-val="6">6</div>
+        <div class="key fn" data-act="fn" data-val="1/(">1/x</div>
+        <div class="key op" data-act="op" data-val="-">−</div>
+
+        <div class="key num" data-act="num" data-val="1">1</div>
+        <div class="key num" data-act="num" data-val="2">2</div>
+        <div class="key num" data-act="num" data-val="3">3</div>
+        <div class="key fn" data-act="fn" data-val="x^2">x²</div>
+        <div class="key op" data-act="op" data-val="+">+</div>
+
+        <div class="key clear" data-act="clear">C</div>
+        <div class="key num" data-act="num" data-val="0">0</div>
+        <div class="key num" data-act="dot" data-val=".">.</div>
+        <div class="key" data-act="sign">±</div>
+        <div class="key equals" data-act="equals">=</div>
+      </div>
+
+    </div>
+
+    <!-- ============ MÓDULO 02: REFERENCIA ============ -->
+    <div class="module" id="module-ref">
+
+      <div class="ref-grid">
+
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-tag">01</span> Regla de signos
+          </div>
+          <table class="ref-table">
+            <thead>
+              <tr><th>A</th><th></th><th>B</th><th></th><th>Resultado</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>+</td><td class="op-col">×</td><td>+</td><td class="eq-col">=</td><td class="pos">+</td></tr>
+              <tr><td>−</td><td class="op-col">×</td><td>−</td><td class="eq-col">=</td><td class="pos">+</td></tr>
+              <tr><td>+</td><td class="op-col">×</td><td>−</td><td class="eq-col">=</td><td class="neg">−</td></tr>
+              <tr><td>−</td><td class="op-col">×</td><td>+</td><td class="eq-col">=</td><td class="neg">−</td></tr>
+            </tbody>
+          </table>
+          <div class="ref-note">Válido igual para la división (÷).</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-tag">02</span> Datos de interés
+          </div>
+          <table class="ref-table">
+            <tbody>
+              <tr><td>π (pi)</td><td class="mono">3.14159265...</td></tr>
+              <tr><td>e (Euler)</td><td class="mono">2.71828182...</td></tr>
+              <tr><td>φ (áureo)</td><td class="mono">1.61803398...</td></tr>
+              <tr><td>√2</td><td class="mono">1.41421356...</td></tr>
+              <tr><td>0!</td><td class="mono">1</td></tr>
+              <tr><td>Suma ángulos triángulo</td><td class="mono">180°</td></tr>
+              <tr><td>Círculo completo</td><td class="mono">360° · 2π rad</td></tr>
+            </tbody>
+          </table>
+          <div class="ref-note">Referencia rápida, valores truncados.</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-tag">03</span> Identidades trigonométricas
+          </div>
+          <table class="ref-table trig-table">
+            <tbody>
+              <tr><td>Pitagórica</td><td class="mono">sin²θ + cos²θ = 1</td></tr>
+              <tr><td>Tangente</td><td class="mono">tan θ = sin θ / cos θ</td></tr>
+              <tr><td>Cotangente</td><td class="mono">cot θ = 1 / tan θ</td></tr>
+              <tr><td>Suma de ángulos</td><td class="mono">sin(a+b) = sin a·cos b + cos a·sin b</td></tr>
+              <tr><td>Ángulo doble</td><td class="mono">sin 2θ = 2·sin θ·cos θ</td></tr>
+              <tr><td>Ley de senos</td><td class="mono">a/sin A = b/sin B = c/sin C</td></tr>
+            </tbody>
+          </table>
+          <div class="ref-note">θ en radianes o grados según convención usada.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ MÓDULO 03: CONVERSOR DE BASES ============ -->
+    <div class="module" id="module-base">
+
+      <div class="base-grid">
+        <div class="base-row">
+          <label class="base-label" for="base-dec">DEC <span>base 10</span></label>
+          <input class="base-input" id="base-dec" data-base="10" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+        </div>
+        <div class="base-row">
+          <label class="base-label" for="base-hex">HEX <span>base 16</span></label>
+          <input class="base-input" id="base-hex" data-base="16" type="text" placeholder="0" autocomplete="off">
+        </div>
+        <div class="base-row">
+          <label class="base-label" for="base-oct">OCT <span>base 8</span></label>
+          <input class="base-input" id="base-oct" data-base="8" type="text" placeholder="0" autocomplete="off">
+        </div>
+        <div class="base-row">
+          <label class="base-label" for="base-bin">BIN <span>base 2</span></label>
+          <input class="base-input" id="base-bin" data-base="2" type="text" placeholder="0" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="base-actions">
+        <div class="key fn wide" data-act="base-clear">Limpiar</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer-note">Instrumento de precisión numérica</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
