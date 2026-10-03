@@ -15,7 +15,7 @@ Simulador web que permite elegir entre un **Autómata Finito Determinístico (AF
 
 Ambos implementan la interfaz común `Automata` con el método `ejecutar(string $cadena): array`, así que `index.php` los trata de forma polimórfica. Cada ejecución devuelve el tipo de autómata, la cadena evaluada, la traza de transiciones, los estados finales alcanzados y si la cadena fue aceptada.
 
-```
+```text
 afd-afnd/
 ├── Automata.php   # Interfaz común
 ├── AFD.php        # Autómata determinístico
@@ -29,7 +29,7 @@ afd-afnd/
 Implementación en PHP de estructuras lineales y no lineales, enfocadas en las operaciones fundamentales del desarrollo de compiladores.
 
 | Archivo | Estructura | Uso en compiladores |
-|---|---|---|
+| --- | --- | --- |
 | `listas.php` | Lista simplemente enlazada | Manipulación dinámica de elementos |
 | `listas_dobles.php` | Lista doblemente enlazada | Recorridos en ambos sentidos |
 | `pilas.php` | Pila (LIFO) | Evaluación de expresiones y análisis sintáctico |
@@ -46,12 +46,12 @@ Convierte expresiones entre las tres notaciones: **infija**, **prefija** y **pos
 
 Ejemplo: `A + B * C` equivale a `A B C * +` en posfija y a `+ A * B C` en prefija.
 
-**Cómo funciona.** Toda conversión se apoya en una pila:
+**Cómo funciona:** Toda conversión se apoya en una pila:
 
 - **Infija a posfija:** algoritmo *Shunting-Yard* con una pila de operadores.
 - **Posfija o prefija a infija, y entre prefija y posfija:** una pila de operandos que se van combinando con cada operador (la prefija se recorre de derecha a izquierda).
 
-**Validación.** Detecta caracteres no válidos, expresiones vacías, paréntesis desbalanceados, paréntesis en pre/posfija y expresiones mal formadas, con operandos de más o de menos.
+**Validación:** Detecta caracteres no válidos, expresiones vacías, paréntesis desbalanceados, paréntesis en pre/posfija y expresiones mal formadas, con operandos de más o de menos.
 
 **Detalles a tener en cuenta:**
 
@@ -72,7 +72,7 @@ Calculadora responsive con tema claro y oscuro, hecha con HTML, CSS y JavaScript
 
 Usa [Math.js](https://mathjs.org/) y [SweetAlert2](https://sweetalert2.github.io/).
 
-```
+```text
 calculadora/
 ├── index.html
 ├── css/index.css
@@ -83,7 +83,7 @@ calculadora/
 
 ## Estructura del proyecto
 
-```
+```text
 compiladores-toolkit/
 ├── index.php            # Notaciones
 ├── vista.php
@@ -109,14 +109,15 @@ Requisitos: **PHP 7.4 o superior** y un servidor local como **XAMPP**.
    ```
 
 2. Inicia Apache desde XAMPP.
+
 3. Abre cada módulo en el navegador:
 
-   | Módulo | Dirección |
-   |---|---|
-   | Notaciones | `http://localhost/compiladores-toolkit/` |
-   | Autómatas | `http://localhost/compiladores-toolkit/afd-afnd/` |
-   | Estructuras de datos | `http://localhost/compiladores-toolkit/estructuras-datos/` (por ejemplo `pilas.php`) |
-   | Calculadora | `http://localhost/compiladores-toolkit/calculadora/` |
+| Módulo | Dirección |
+| --- | --- |
+| Notaciones | `http://localhost/compiladores-toolkit/` |
+| Autómatas | `http://localhost/compiladores-toolkit/afd-afnd/` |
+| Estructuras de datos | `http://localhost/compiladores-toolkit/estructuras-datos/` (por ejemplo `pilas.php`) |
+| Calculadora | `http://localhost/compiladores-toolkit/calculadora/` |
 
 ---
 
