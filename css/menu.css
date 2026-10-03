@@ -1,0 +1,125 @@
+/* Menú común. Todas las clases llevan prefijo tk- para no chocar con los CSS de los módulos.
+   El menú es fijo arriba y no depende del fondo ni del tema de cada sección. */
+
+:root { --tk-alto: 3.5rem; }
+
+.tk-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: #12151f;
+  color: #e8ecf5;
+  border-bottom: 1px solid #262b35;
+  font: 500 .95rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: box-shadow .2s;
+}
+.tk-menu, .tk-menu * { box-sizing: border-box; }
+.tk-menu.tk-sombra { box-shadow: 0 8px 22px rgba(0, 0, 0, .35); }
+
+.tk-barra {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: var(--tk-alto);
+  padding: 0 1.25rem;
+}
+
+.tk-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tk-marca b {
+  padding: .25rem .5rem;
+  border-radius: 8px;
+  background: #4a43e0;
+  font: 700 .85rem ui-monospace, Consolas, monospace;
+}
+
+.tk-nav { margin-left: auto; min-width: 0; }
+.tk-nav > ul { display: flex; gap: .25rem; margin: 0; padding: 0; list-style: none; }
+
+/* Enlaces y botón del desplegable comparten aspecto */
+.tk-nav a, .tk-boton-sub {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .55rem .95rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #aab3cc;
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tk-nav a:hover, .tk-boton-sub:hover { background: #1d2230; color: #fff; }
+.tk-nav a[aria-current], .tk-boton-sub[aria-current] { background: #5fe3c0; color: #12151f; font-weight: 700; }
+
+/* Flecha del botón */
+.tk-caret {
+  width: .4rem;
+  height: .4rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform .15s;
+}
+.tk-abierto > .tk-boton-sub .tk-caret { transform: rotate(-135deg) translateY(-2px); }
+
+/* Desplegable */
+.tk-tiene-sub { position: relative; }
+.tk-desplegable {
+  display: none;
+  position: absolute;
+  top: calc(100% + .5rem);
+  left: 0;
+  min-width: 12.5rem;
+  margin: 0;
+  padding: .4rem;
+  list-style: none;
+  background: #181c28;
+  border: 1px solid #262b35;
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .45);
+}
+.tk-tiene-sub.tk-abierto > .tk-desplegable { display: block; }
+/* Sin JavaScript se abre al enfocar el botón */
+.tk-menu:not(.tk-js) .tk-tiene-sub:focus-within > .tk-desplegable { display: block; }
+
+.tk-desplegable a {
+  display: block;
+  padding: .55rem .8rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.tk-desplegable a:hover { background: #222736; color: #fff; }
+.tk-desplegable a[aria-current] { background: #12151f; color: #5fe3c0; font-weight: 700; }
+
+.tk-menu a:focus-visible, .tk-menu button:focus-visible { outline: 3px solid #ffd166; outline-offset: 2px; }
+
+/* Deja sitio al menú fijo sin tocar los CSS de cada módulo (el menú debe ser hijo directo de <body>). */
+body:has(> .tk-menu) { padding-top: calc(var(--tk-alto) + 1.5rem); }
+
+/* Pantallas angostas: la barra se desplaza de lado y el desplegable ocupa el ancho bajo la barra */
+@media (max-width: 899px) {
+  .tk-nav { overflow-x: auto; scrollbar-width: none; }
+  .tk-nav::-webkit-scrollbar { display: none; }
+  .tk-tiene-sub { position: static; }
+  .tk-desplegable {
+    position: fixed;
+    top: calc(var(--tk-alto) + .25rem);
+    left: .75rem;
+    right: .75rem;
+    min-width: 0;
+  }
+}
+@media (max-width: 640px) {
+  .tk-marca span { display: none; }
+  .tk-barra { padding: 0 .75rem; }
+}

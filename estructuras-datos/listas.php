@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/menu.php'; 
 // Lista enlazada simple
 // Genera una pagina HTML con la representacion visual de la lista
 
@@ -136,9 +137,10 @@ function dibujarLista(array $valores): string {
     }
     .vacio { color: #888; font-style: italic; }
 </style>
+  <?php tk_menu_head(); ?>
 </head>
 <body>
-
+    <?php tk_menu(); ?>
 <h1>Lista Enlazada Simple</h1>
 
 <h2>Lista original (10, 20, 30, 40)</h2>

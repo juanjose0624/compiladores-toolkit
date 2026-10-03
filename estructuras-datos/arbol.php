@@ -1,4 +1,5 @@
-<?php
+<?php 
+require_once __DIR__ . '/../includes/menu.php'; 
 // Taller - Arbol Binario de Busqueda
 // Insercion + recorridos inorden, preorden, posorden
 
@@ -207,9 +208,10 @@ $altoSvg = $profundidad * 80 + 40;
     .error { color: #ff6f6f; font-weight: bold; }
     footer { margin-top: 40px; color: #777; font-size: 13px; }
 </style>
+  <?php tk_menu_head(); ?>
 </head>
 <body>
-
+    <?php tk_menu(); ?>
 <h1>Arbol Binario de Busqueda</h1>
 <p>Datos insertados: <?= implode(", ", $datos) ?></p>
 

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../includes/menu.php'; 
+
 // Cola (Queue) - FIFO
 // Genera una pagina HTML con la representacion visual
 
@@ -91,9 +93,10 @@ function dibujarCola(array $valores): string {
     }
     .vacio { color: #888; font-style: italic; }
 </style>
+  <?php tk_menu_head(); ?>
 </head>
 <body>
-
+    <?php tk_menu(); ?>
 <h1>Cola (Queue) - FIFO</h1>
 
 <h2>Cola despues de enqueue(1), enqueue(2), enqueue(3)</h2>

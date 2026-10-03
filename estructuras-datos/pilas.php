@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/menu.php';
 // Pila (Stack) - LIFO
 // Genera una pagina HTML con la representacion visual
 
@@ -107,8 +108,10 @@ function dibujarPila(array $valores): string {
     .vacio { color: #888; font-style: italic; }
     .info { color: #ccc; margin-top: 10px; }
 </style>
+  <?php tk_menu_head(); ?>
 </head>
 <body>
+    <?php tk_menu(); ?>
 
 <h1>Pila (Stack) - LIFO</h1>
 
